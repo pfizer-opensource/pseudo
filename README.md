@@ -3,7 +3,8 @@
 
 This repository hosts the code for 
 
-Pseudo-Sigma: adaptive pseudo-labeling fo quantum calculations by Kexin Huang, Mykola Bordyuh, Vishnu Sresht, Brajesh Rai.
+Adaptive pseudo-labeling fo quantum calculations
+By Kexin Huang, Mykola Bordyuh, Vishnu Sresht, Brajesh Rai.
 
 
 ## Install
