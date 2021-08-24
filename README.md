@@ -1,7 +1,10 @@
 # Adaptive Pseudo-labeling for Quantum Calculations
 
 
-This repository hosts the code for Pseudo-Sigma: adaptive pseudo-labeling fo quantum calculations by Kexin Huang, Mykola Bordyuh, Vishnu Sresht, Brajesh Rai.
+This repository hosts the code for 
+
+Pseudo-Sigma: adaptive pseudo-labeling fo quantum calculations by Kexin Huang, Mykola Bordyuh, Vishnu Sresht, Brajesh Rai.
+
 
 ## Install
 
@@ -49,11 +52,11 @@ python train.py --label mu \ # molecule target
                 --evi_lambda 0.5 \ # evidental loss regularization coefficient                
 ```
 
-For more options, checkout the parser in `train.py`.
+For more options, checkout the parser in `train.py`. Also checkout a demo test in the notebook `demo.ipynb`.
 
 ## Contact
 
-Feel free to open a issue or send emails to [Kexin](kexinh@stanford.edu).
+Feel free to open an issue or send emails to [Kexin](kexinh@stanford.edu).
 
 ## Acknowledgement
 
