@@ -78,7 +78,7 @@ else:
 if args.setting == 'low_data':
     args.exp_name += str(args.training_fraction)
 
-if args.uncertainty == 'True':    
+if args.uncertainty in ['evidential', 'gaussian']:    
     args.exp_name = args.exp_name + '_' + args.uncertainty_type     
 else:
     args.exp_name += '_nosigma'

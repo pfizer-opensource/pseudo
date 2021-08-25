@@ -155,7 +155,7 @@ class run():
 
             self.scheduler.step()
             
-            if (ood_eval == 'True') and (epoch % 3 == 0):        
+            if (ood_eval == 'True') and (epoch % 20 == 0):        
                 with torch.no_grad():
                     ood_mae = self.evaluate(model, 
                            data_loader = unlabeled_loader, 
@@ -185,7 +185,21 @@ class run():
         if log_dir != '':
             writer.close()
         
-       
+        if ood_eval == 'True':        
+            with torch.no_grad():
+                ood_mae = self.evaluate(model, 
+                       data_loader = unlabeled_loader, 
+                       energy_and_force = False, p = 100, 
+                       evaluation = evaluation, device = device, 
+                       uncertainty = uncertainty,
+                       ood_status = 'True')
+                print('MAE on PC9: ' + str(ood_mae))
+
+                if wandb_mode == 'True':
+                    wandb.log({"OOD MAE": ood_mae})
+
+                if sweep_wandb is not None:
+                    sweep_wandb.log({"ood_mae": ood_mae})
     def train(self, model, optimizer, train_loader, energy_and_force, p, loss_func, device, add_pos_noise, sep_unlabel, uncertainty, evi_lambda, weighted_loss):
         model.train()
         loss_accum = 0
