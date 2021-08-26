@@ -83,24 +83,25 @@ To reproduce low data setting, replace the `training_fraction` value with the lo
 
 <details>
   <summary>Click here for the code!</summary>
-```bash
-python train.py --label mu \
-                --model dimenet \
-                --pseudo_label True \
-                --setting low_data \
-                --training_fraction 0.1 \
-                --initial_train_epoch 300 \
-                --pseudo_ensemble True \
-                --lr 0.001 \
-                --lr_decay_factor 0.5 \
-                --lr_decay_step_size 15 \
-                --iteration 15 \
-                --evi_lambda 0.5 \
-                --epoch 50 \
-                --batch_size 128 \
-                --uncertainty_type epistemic
+    
+    ```bash
+    python train.py --label mu \
+                    --model dimenet \
+                    --pseudo_label True \
+                    --setting low_data \
+                    --training_fraction 0.1 \
+                    --initial_train_epoch 300 \
+                    --pseudo_ensemble True \
+                    --lr 0.001 \
+                    --lr_decay_factor 0.5 \
+                    --lr_decay_step_size 15 \
+                    --iteration 15 \
+                    --evi_lambda 0.5 \
+                    --epoch 50 \
+                    --batch_size 128 \
+                    --uncertainty_type epistemic
 
-```
+    ```
 </details>
 
 
