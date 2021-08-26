@@ -67,7 +67,9 @@ def get_pred_evidential_epistemic(out):
 class run():
 
     def __init__(self):
-        pass
+        
+        self.best_val_mae = 10000
+        self.best_test_mae = 10000
         
     def run(self, device, train_dataset, valid_dataset, test_dataset, model, loss_func, evaluation, epochs=300, batch_size=128, vt_batch_size=128, lr=0.001, lr_decay_factor=0.5, lr_decay_step_size=50, weight_decay=0, 
         energy_and_force=False, p=100, save_dir='', log_dir='', wandb_mode = 'False', exp_name = 'dig', proj_name = 'dig_data', entity_name = 'kexin', add_noise = 'False', sep_unlabel = 'False', uncertainty = 'False', evi_lambda = 1e-2, unlabeled_dataset = None, ood_eval = 'False', weighted_loss = 'False', reinit_lr = 'True', sweep_wandb = None, uncertainty_type = 'aleatoric'):
@@ -171,8 +173,15 @@ class run():
                     if sweep_wandb is not None:
                         sweep_wandb.log({"ood_val_mae": ood_mae})
             
-        print(f'Best validation MAE so far: {best_valid}')
-        print(f'Test MAE when got best validation result: {best_test}')
+        print(f'Best validation MAE in current episode: {best_valid}')
+        print(f'Test MAE when got best validation result in current episode: {best_test}')
+        
+        if best_valid < self.best_val_mae:
+            self.best_test_mae = best_test
+            self.best_val_mae = best_valid
+            
+        print(f'Best validation MAE in all episode: {self.best_val_mae}')
+        print(f'Best testing MAE when got best validation result in all episodes: {self.best_test_mae}')
         
         if wandb_mode == 'True':
             wandb.log({"best validation mae": best_valid})
