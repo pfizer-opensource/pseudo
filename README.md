@@ -1,9 +1,8 @@
-# Adaptive Pseudo-labeling for Quantum Calculations
-
+# Uncertainty-Aware Pseudo-labeling for Quantum Calculations
 
 This repository hosts the code for 
 
-**Adaptive pseudo-labeling fo quantum calculations**
+**Uncertainty-Aware Pseudo-labeling for Quantum Calculations**
 
 *By Kexin Huang, Mykola Bordyuh, Vishnu Sresht, Brajesh Rai.*
 
@@ -38,7 +37,7 @@ Please download the processed dataset through this [link](https://drive.google.c
 ## Train
 
 ```bash
-python train.py --label mu \ # molecule target
+python train.py --label homo \ # molecule target
                 --setting low_data \ # low data setting or standard fully supervised setting
                 --training_fraction 0.01 \ # fraction of training QM9, rest is used as unlabeled
                 --pseudo_label True \ # whether or not to use pseudo-label or standard
@@ -62,7 +61,7 @@ To reproduce full data setting:
   <summary>Click here for the code!</summary>
 
 ```bash
-python train.py --label mu \
+python train.py --label homo \
                 --model dimenet \
                 --pseudo_label True \
                 --setting standard \
@@ -86,7 +85,7 @@ To reproduce low data setting, replace the `training_fraction` value with the lo
   <summary>Click here for the code!</summary>
     
 ```bash
-python train.py --label mu \
+python train.py --label homo \
                 --model dimenet \
                 --pseudo_label True \
                 --setting low_data \
@@ -107,9 +106,16 @@ python train.py --label mu \
 </details>
 
 
-## Contact
+## Citation
 
-Feel free to open an issue or send emails to [Kexin](kexinh@stanford.edu).
+```
+@inproceedings{huang2022uncertainty,
+  title={Uncertainty-Aware Pseudo-labeling for Quantum Calculations},
+  author={Huang, Kexin and Sresht, Vishnu and Rai, Brajesh and Bordyuh, Mykola},
+  booktitle={The 38th Conference on Uncertainty in Artificial Intelligence},
+  year={2022}
+}
+```
 
 ## Acknowledgement
 

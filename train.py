@@ -14,14 +14,14 @@ from argparse import ArgumentParser
 parser = ArgumentParser(description='pseudo')
 
 ## data
-parser.add_argument('--label', default='homo', type=str, choices = ['A', 'B', 'C', 'mu', 'alpha', 'homo', 'lumo', 'gap', 'r2', 'zpve', 'U0', 'U', 'H', 'G', 'Cv', 'omega1', 'zpve_thermo', 'U0_thermo', 'U_thermo', 'H_thermo', 'G_thermo', 'Cv_thermo'], help = 'molecular target')
+parser.add_argument('--label', default='homo', type=str, choices = ['homo', 'lumo'], help = 'molecular target')
 parser.add_argument('--training_fraction', default=0.01, type=float, help = 'fraction of training QM9, rest is used as unlabeled')
 parser.add_argument('--setting', default='low_data', choices = ['low_data', 'standard'], type = str, help = 'low data setting or standard fully supervised setting')
 
 ## wandb
 parser.add_argument('--wandb', default='False', type=str, choices = ['True', 'False'], help = 'wandb mode')
 parser.add_argument('--proj_name', default='qm_result', type=str, help = 'wandb project name')
-parser.add_argument('--entity_name', default='kexin_pfizer', type=str, help = 'wandb entity name')
+parser.add_argument('--entity_name', default='kexinhuang', type=str, help = 'wandb entity name')
 
 ## model params
 parser.add_argument('--pseudo_label', default='True', type=str, choices = ['True', 'False', 'test'], help = 'whether or not to use pseudo-label or standard')
@@ -57,6 +57,7 @@ parser.add_argument('--noise_type', default='False', type = str, choices =['Fals
 parser.add_argument('--noise_var', default=0.001, type = float, help = 'positional noise variance')
 parser.add_argument('--student_training', default='False', choices = ['True', 'False'], type = str, help = 'whether or not to do student training')
 parser.add_argument('--ood_eval', default='False', type = str, choices = ['True', 'False'], help = 'whether or not to evaluate on OOD dataset, only work for standard setting')
+parser.add_argument('--device', default='cuda:0', type = str)
 
 args = parser.parse_args()
 
@@ -88,8 +89,12 @@ if args.student_training == 'True':
     
 if args.weighted_loss == 'False':
     args.exp_name += '_wlf'
+    args.exp_name += '_' + str(args.uncertainty_threshold)
+
+if args.noise_type == 'True':
+    args.exp_name += '_noise'
     
-device = torch.device('cuda') if torch.cuda.is_available() else torch.device("cpu")
+device = torch.device(args.device) if torch.cuda.is_available() else torch.device("cpu")
 
 if args.wandb == 'True':
     import wandb
