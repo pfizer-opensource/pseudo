@@ -32,6 +32,7 @@ pip install -r requirements.txt
 ```
 
 ## Dataset
+PSEUDO relies on QM9 and PC9 datasets.
 Please download the processed dataset through this [link](https://drive.google.com/file/d/1uF5nNgd3mtm-2uUwLdXfVUFI1hSCi1fw/view?usp=sharing). Unzip it and place the folder "dataset" in the repository.
 
 ## Train
